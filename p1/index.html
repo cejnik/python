@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Poznámky k textu</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        gap: 40px;
+        padding: 20px;
+      }
+
+      .text-block {
+        margin-bottom: 10px;
+      }
+
+      .note-btn {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
+      #notes {
+        border-left: 2px solid #ccc;
+        padding-left: 20px;
+        width: 300px;
+      }
+
+      .note {
+        background: #f5f5f5;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+      }
+
+      .orphan {
+        opacity: 0.6;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>Texty</h2>
+
+      <div class="text-block" id="text-1">
+        <span>Toto je první text</span>
+        <button class="note-btn" onclick="addNote('text-1')">📝</button>
+        <button onclick="deleteText('text-1')">❌</button>
+      </div>
+
+      <div class="text-block" id="text-2">
+        <span>Toto je druhý text</span>
+        <button class="note-btn" onclick="addNote('text-2')">📝</button>
+        <button onclick="deleteText('text-2')">❌</button>
+      </div>
+    </div>
+
+    <div id="notes">
+      <h2>Poznámky</h2>
+      <div id="notes-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
