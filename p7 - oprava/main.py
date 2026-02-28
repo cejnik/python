@@ -38,5 +38,4 @@ def insert_data():
     connection.close()
 
 insert_data()
-print("Hello")
 
