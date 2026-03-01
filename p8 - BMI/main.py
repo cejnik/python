@@ -24,6 +24,37 @@ def bmi_calc(weight, height):
     label_user_result_BMI['text'] = bmi
     label_user_result_BMI_text ['text'] = text_result
 
+    insert_data(bmi, text_result)
+
+def insert_data(bmi_number, bmi_text):
+    connection = psycopg2.connect(
+        dbname = 'health',
+        user='postgres',
+        password='admin',
+        host='localhost',
+        port='5432'
+    )
+    cur = connection.cursor()
+    query = '''INSERT INTO bmi(bmi_number, bmi_text) VALUES (%s, %s)'''
+    cur.execute(query, (bmi_number, bmi_text))
+    connection.commit()
+    connection.close()
+
+def count_all_data():
+    connection = psycopg2.connect(
+        dbname = 'health',
+        user='postgres',
+        password='admin',
+        host='localhost',
+        port='5432'
+    )
+    cur = connection.cursor()
+    query = '''SELECT COUNT(bmi_id) FROM bmi'''
+    cur.execute(query)
+    count = cur.fetchone()
+    connection.close()
+    return count[0]
+
 # Labels
 label_general = Label(root, text='Calculate BMI')
 label_general.grid(row=0, column=1)
@@ -45,7 +76,7 @@ label_user_result_BMI_text = Label(root)
 label_user_result_BMI_text.grid(row=5, column=1)
 label_count_text = Label(root, text='Users: ')
 label_count_text.grid(row=6, column=0)
-label_count_number = Label(root, text='Doplnit')
+label_count_number = Label(root, text=count_all_data())
 label_count_number.grid(row=6, column=1)
 
 # Inputs
