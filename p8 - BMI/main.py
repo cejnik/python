@@ -6,6 +6,23 @@ root.title('Výpočet BMI')
 root.geometry('250x250')
 root.resizable(False, False)
 
+# Functions
+def bmi_calc(weight, height):
+    text_result = ''
+    bmi = round(float(weight)/float(height)/float(height),2)
+    if bmi < 18.5:
+        text_result = 'underweight'
+    elif bmi < 24.9:
+        text_result = 'normal'
+    elif bmi < 29.9:
+        text_result = 'overweight'
+    elif bmi < 34.9:
+        text_result = 'obese'
+    elif bmi >= 34.9:
+        text_result = 'extreme obese'
+    # Results to labels
+    label_user_result_BMI['text'] = bmi
+    label_user_result_BMI_text ['text'] = text_result
 
 # Labels
 label_general = Label(root, text='Calculate BMI')
@@ -20,17 +37,16 @@ label_height_unit = Label(root,text='m')
 label_height_unit.grid(row=2, column=3)
 label_result_BMI = Label(root, text='Result: ')
 label_result_BMI.grid(row=4, column=0)
-label_user_result_BMI = Label(root, text='Doplnit')
+label_user_result_BMI = Label(root)
 label_user_result_BMI.grid(row=4, column=1)
 label_user_result_BMI_text = Label(root, text='Text result: ')
 label_user_result_BMI_text.grid(row=5, column=0)
-label_user_result_BMI_text = Label(root, text='Doplnit')
+label_user_result_BMI_text = Label(root)
 label_user_result_BMI_text.grid(row=5, column=1)
 label_count_text = Label(root, text='Users: ')
 label_count_text.grid(row=6, column=0)
 label_count_number = Label(root, text='Doplnit')
 label_count_number.grid(row=6, column=1)
-
 
 # Inputs
 entry_weight = Entry(root)
@@ -38,21 +54,8 @@ entry_weight.grid(row=1, column=1)
 entry_height = Entry(root)
 entry_height.grid(row=2, column=1)
 
-
 # Button
-calculate_button = Button(root, text="Calculate")
+calculate_button = Button(root, text="Calculate", command=lambda:bmi_calc(entry_weight.get(), entry_height.get()))
 calculate_button.grid(row=3, column=1)
-
-
-
-
-
-
-
-
-
-
-
-
 
 root.mainloop()
