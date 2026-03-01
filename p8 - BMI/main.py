@@ -28,40 +28,53 @@ def bmi_calc(weight, height):
 
 def check_dot(number):
     number_string = str(number)
-    if ',' in number_string:
-        return number_string.replace(',', '.')
-    return number_string
+    return number_string.replace(',', '.') if ',' in number_string else number_string
 
+# AD 1
+# def insert_data(bmi_number, bmi_text):
+#     connection = psycopg2.connect(
+#         dbname = 'health',
+#         user='postgres',
+#         password='admin',
+#         host='localhost',
+#         port='5432'
+#     )
+#     cur = connection.cursor()
+#     query = '''INSERT INTO bmi(bmi_number, bmi_text) VALUES (%s, %s)'''
+#     cur.execute(query, (bmi_number, bmi_text))
+#     connection.commit()
+#     connection.close()
+
+# AD 2
 def insert_data(bmi_number, bmi_text):
-    connection = psycopg2.connect(
-        dbname = 'health',
-        user='postgres',
-        password='admin',
-        host='localhost',
-        port='5432'
-    )
-    cur = connection.cursor()
     query = '''INSERT INTO bmi(bmi_number, bmi_text) VALUES (%s, %s)'''
-    cur.execute(query, (bmi_number, bmi_text))
-    connection.commit()
-    connection.close()
+    with psycopg2.connect(dbname = 'health', user='postgres', password='admin', host='localhost', port='5432') as conn:
+        with conn.cursor() as cur:
+            cur.execute(query, (bmi_number, bmi_text))
 
+# AD 1
+# def count_all_data():
+#     connection = psycopg2.connect(
+#         dbname = 'health',
+#         user='postgres',
+#         password='admin',
+#         host='localhost',
+#         port='5432'
+#     )
+#     cur = connection.cursor()
+#     query = '''SELECT COUNT(bmi_id) FROM bmi'''
+#     cur.execute(query)
+#     count = cur.fetchone()
+#     connection.close()
+    
+# AD 2
 def count_all_data():
-    connection = psycopg2.connect(
-        dbname = 'health',
-        user='postgres',
-        password='admin',
-        host='localhost',
-        port='5432'
-    )
-    cur = connection.cursor()
     query = '''SELECT COUNT(bmi_id) FROM bmi'''
-    cur.execute(query)
-    count = cur.fetchone()
-    connection.close()
-    return count[0]
-
-
+    with psycopg2.connect(dbname = 'health',user='postgres',password='admin',host='localhost',port='5432') as conn:
+        with conn.cursor() as cur:
+            cur.execute(query)
+            count = cur.fetchone()
+            return count[0] if count is not None else 0
 
 # Labels
 label_general = Label(root, text='Calculate BMI')
