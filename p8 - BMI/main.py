@@ -18,6 +18,18 @@ label_weight_unit = Label(root, text='kg')
 label_weight_unit.grid(row=1, column=3)
 label_height_unit = Label(root,text='m')
 label_height_unit.grid(row=2, column=3)
+label_result_BMI = Label(root, text='Result: ')
+label_result_BMI.grid(row=4, column=0)
+label_user_result_BMI = Label(root, text='Doplnit')
+label_user_result_BMI.grid(row=4, column=1)
+label_user_result_BMI_text = Label(root, text='Text result: ')
+label_user_result_BMI_text.grid(row=5, column=0)
+label_user_result_BMI_text = Label(root, text='Doplnit')
+label_user_result_BMI_text.grid(row=5, column=1)
+label_count_text = Label(root, text='Users: ')
+label_count_text.grid(row=6, column=0)
+label_count_number = Label(root, text='Doplnit')
+label_count_number.grid(row=6, column=1)
 
 
 # Inputs
