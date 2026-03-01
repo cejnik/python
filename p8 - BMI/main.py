@@ -8,8 +8,16 @@ root.resizable(False, False)
 
 # Functions
 def bmi_calc(weight, height):
-    text_result = ''
-    bmi = round(float(weight)/float(height)/float(height),2)
+    try:
+        weight = float(weight)
+        height = float(height)
+    except ValueError:
+        label_user_result_BMI['text'] = 'Value Error'
+        label_user_result_BMI_text ['text'] = 'Value Error'
+        return None
+
+    # text_result = ''
+    bmi = round(weight/height/height,2)
     if bmi < 18.5:
         text_result = 'underweight'
     elif bmi < 24.9:
