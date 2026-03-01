@@ -26,6 +26,12 @@ def bmi_calc(weight, height):
 
     insert_data(bmi, text_result)
 
+def check_dot(number):
+    number_string = str(number)
+    if ',' in number_string:
+        return number_string.replace(',', '.')
+    return number_string
+
 def insert_data(bmi_number, bmi_text):
     connection = psycopg2.connect(
         dbname = 'health',
@@ -54,6 +60,8 @@ def count_all_data():
     count = cur.fetchone()
     connection.close()
     return count[0]
+
+
 
 # Labels
 label_general = Label(root, text='Calculate BMI')
@@ -86,7 +94,7 @@ entry_height = Entry(root)
 entry_height.grid(row=2, column=1)
 
 # Button
-calculate_button = Button(root, text="Calculate", command=lambda:bmi_calc(entry_weight.get(), entry_height.get()))
+calculate_button = Button(root, text="Calculate", command=lambda:bmi_calc(check_dot(entry_weight.get()), check_dot(entry_height.get())))
 calculate_button.grid(row=3, column=1)
 
 root.mainloop()
