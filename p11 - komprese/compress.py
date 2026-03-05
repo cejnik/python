@@ -14,8 +14,8 @@ compressed_data = zlib.compress(data_bytes)
 compressed_data_base64 = base64.b64encode(compressed_data)
 
 # 1. možnost - zapsat data compressed_data_base64 do souboru
-with open('compressed.txt', 'wb') as com_file:
-    com_file.write(compressed_data_base64)
+# with open('compressed.txt', 'wb') as com_file:
+#     com_file.write(compressed_data_base64)
 
 # Doporučeno -------------------------------------------------------
 # 2. možnost - zapsat data compresed_data_base64 do souboru jako text
